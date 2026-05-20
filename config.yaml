@@ -1,0 +1,17 @@
+image_folder: "images"
+output_txt: "answers/answers.txt"
+model_name: "qwen3.5:2b"
+ollama_api_url: "http://127.0.0.1:11434/api/generate"
+
+# 可选项
+image_extensions:
+  - "*.png"
+  - "*.jpg"
+  - "*.jpeg"
+  - "*.bmp"
+  - "*.tiff"
+stream: false
+options:
+  temperature: 0.1
+requests:
+  timeout_seconds: 180
