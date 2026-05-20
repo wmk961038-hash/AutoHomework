@@ -1,17 +1,27 @@
 image_folder: "images"
 output_txt: "answers/answers.txt"
 model_name: "qwen3.5:2b"
-ollama_api_url: "http://127.0.0.1:11434/api/generate"
+ollama_api_url: "http://127.0.0.1:11434/api/chat"
 
-# 可选项
+# 发送给 LLM 的提示词（可选，不配置则使用内置默认值）
+prompt: "请解答图片中的题目，直接输出最终答案，不要输出任何额外解释或注释。"
+
+# 可选的图片扩展名
 image_extensions:
   - "*.png"
   - "*.jpg"
   - "*.jpeg"
   - "*.bmp"
   - "*.tiff"
+
+# 是否启用流式输出
 stream: false
+
+# Ollama 模型推理参数
 options:
   temperature: 0.1
+  num_predict: 4096
+
+# HTTP 请求设置
 requests:
   timeout_seconds: 180
