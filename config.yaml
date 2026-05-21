@@ -21,6 +21,7 @@ stream: false
 options:
   temperature: 0.1
   num_predict: 4096
+  think: false
 
 # HTTP 请求设置
 requests:

@@ -24,6 +24,7 @@ def solve_image(image_path: Path, config: Config) -> str:
             }
         ],
         "stream": config.stream,
+        "think": config.options.think,
         "options": {
             "temperature": config.options.temperature,
             "num_predict": config.options.num_predict,
@@ -31,15 +32,20 @@ def solve_image(image_path: Path, config: Config) -> str:
     }
 
     try:
+        if not config.options.think:
+            print("模型没有启用思考")
         response = requests.post(config.chat_url, json=payload, timeout=config.requests.timeout_seconds)
         if response.status_code != 200:
             return f"API 错误：{response.status_code} - {response.text}"
         result = response.json()
         msg = result.get("message", {})
-        answer = msg.get("content", "").strip()
-        if not answer:
-            answer = msg.get("thinking", "").strip()
-        return answer
+        content = msg.get("content", "").strip()
+        thinking = msg.get("thinking", {})
+        print("content:"+content)
+        print("thinking:"+thinking)
+        if not content:
+            return thinking
+        return content
     except Exception as e:
         return f"请求异常：{str(e)}"
 
